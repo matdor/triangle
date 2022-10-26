@@ -43,4 +43,11 @@ class TriangleController extends AbstractController
 
         return new Response('The Triangle was created');
     }
+    #[Route('/show' , name: 'overview')]
+    public function show(){
+
+        return $this ->render('show/index.html.twig');
+
+    }
+
 }
