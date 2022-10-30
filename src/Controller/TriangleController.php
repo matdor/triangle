@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Triangle;
 use App\Repository\TriangleRepository;
+use App\Form\TriangleType;
 use Doctrine\Migrations\Configuration\EntityManager\ManagerRegistryEntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,6 +49,7 @@ class TriangleController extends AbstractController
 
         return $this->redirect($this->generateUrl('triangle.home'));
     }
+
     #[Route('/show/{id}', name: '.show')]
     public function show($id, TriangleRepository $triangleRepository) 
     {
@@ -56,8 +58,39 @@ class TriangleController extends AbstractController
                return $this->render('triangle/show.html.twig' , [
                 'triangles' => $triangles
         ]);
-    
     }
+
+    #[Route('/new' , name: '.new')]
+    public function createNew(Request $request, ManagerRegistry $doctrine):Response
+    {
+        //create new triangle with sides a b c
+
+        $createTriangle = new Triangle();
+
+            $form = $this->createForm(TriangleType::class, $createTriangle);
+
+            $form -> handleRequest($request);
+
+            if ($form->isSubmitted()){
+                
+       
+                $em = $doctrine->getManager();
+                $em->persist($createTriangle);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('triangle.home'));
+
+            }
+        //push the created triangle into the db
+       
+
+        
+
+        return $this->render('triangle/create.html.twig', [
+            'form' => $form ->createView()
+        ]);
+    }
+    
     #[Route('/delete/{id}', name: '.delete')]
     public function remove(Triangle $Triangle, ManagerRegistry $doctrine) 
     {
