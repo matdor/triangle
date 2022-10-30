@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TriangleInputType extends AbstractType
+class TriangleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

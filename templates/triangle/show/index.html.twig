@@ -7,22 +7,16 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-<h2>Triangle Database</h2>
-    {% for message in app.flashes('success')%}
-        <div class:"alert alert.success">
-            {{ message }}
-        </div>
-    {% endfor %}
+
 <div class="example-wrapper">
    <table class="table table-striped">
    <thred>
         <tr>
-            <td>ID</td>
-            <td>Triangle Name</td>
-            <td>SideA</td>
-            <td>SideB</td>
-            <td>SideC</td>
-            <td>Actions</td>
+            <td>ID</>
+            <td>Triangle Name</>
+            <td>SideA</>
+            <td>SideB</>
+            <td>SideC</>
         </tr>
    </thred>
    <tbody>
@@ -36,11 +30,6 @@
             <td>{{triangle.SideA}}</td>
             <td>{{triangle.SideB}}</td>
             <td>{{triangle.SideC}}</td>
-            <td>
-                <a class="text.danger" href="{{ path('triangle.delete', {id: triangle.id} )}}">
-                Delete
-                </a>
-            </td>
         </tr>
         {% endfor %}
     </tbody>
