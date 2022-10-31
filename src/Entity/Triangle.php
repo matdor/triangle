@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TriangleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\Response;
 
 #[ORM\Entity(repositoryClass: TriangleRepository::class)]
 class Triangle
@@ -21,6 +22,15 @@ class Triangle
 
     #[ORM\Column]
     private ?float $sideC = null;
+
+    private ?float $heightT = null;
+
+    private ?float $circumferenceT = null;
+
+    private ?float $baseT = null;
+
+    private ?float $areaT = null;
+
 
     public function getId(): ?int
     {
@@ -63,5 +73,53 @@ class Triangle
         return $this;
     }
 
+    public function getCircumferenceT(): ?float
+    {
+        return $this->sideA + $this->sideB + $this->sideC;
+    }
+
+    public function setCircomferenceT(float $circumferenceT)
+    {
+        $this->circumferenceT = $circumferenceT;
+
+        return $this;
+    }
+
+    public function getHeightT(): ?float
+    {
+        return $this->circumferenceT/2;
+    }
+
+    public function setHeightT(float $heightT)
+    {
+        $this->heightT = $heightT;
+
+        return $this;
+    }
+
+    public function getBaseT(): ?float
+    {
+        return max($this->sideA, $this->sideB, $this->sideC);
+    }
+    
+    public function setBaseT(float $baseT)
+    {
+        $this->baseT = $baseT;
+
+        return $this;
+    }
+
+    public function getAreaT(): ?float
+    {
+        return $this->baseT;
+    }
+
+    public function setAreaT(float $areaT)
+    {
+        $this->areaT = $areaT;
+
+        return $this;
+    }
+    
 
 }
