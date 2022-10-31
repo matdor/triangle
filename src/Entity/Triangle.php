@@ -23,11 +23,7 @@ class Triangle
     #[ORM\Column]
     private ?float $sideC = null;
 
-    private ?float $heightT = null;
-
     private ?float $circumferenceT = null;
-
-    private ?float $baseT = null;
 
     private ?float $areaT = null;
 
@@ -85,33 +81,12 @@ class Triangle
         return $this;
     }
 
-    public function getHeightT(): ?float
-    {
-        return $this->circumferenceT/2;
-    }
-
-    public function setHeightT(float $heightT)
-    {
-        $this->heightT = $heightT;
-
-        return $this;
-    }
-
-    public function getBaseT(): ?float
-    {
-        return max($this->sideA, $this->sideB, $this->sideC);
-    }
-    
-    public function setBaseT(float $baseT)
-    {
-        $this->baseT = $baseT;
-
-        return $this;
-    }
-
     public function getAreaT(): ?float
     {
-        return $this->baseT;
+        return round(sqrt((($this->sideA+$this->sideB+$this->sideC)/2)*
+        ((($this->sideA+$this->sideB+$this->sideC)/2)-$this->sideA)*
+        ((($this->sideA+$this->sideB+$this->sideC)/2)-$this->sideB)*
+        ((($this->sideA+$this->sideB+$this->sideC)/2)-$this->sideC)), 2);
     }
 
     public function setAreaT(float $areaT)
