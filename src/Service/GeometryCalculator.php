@@ -2,24 +2,25 @@
 
 namespace App\Service;
 
+use App\Repository\TriangleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
 
 class GeometryCalculator extends AbstractController
 {
-public function getTrianglecalCulation(): JsonResponse
+public function getTriangleCalculation(TriangleRepository $triangleRepository,): JsonResponse
 {
-    $trianglesCount = 0;
-    $trianglesCircumference = 0;
-    $trianglesArea = 0;
-
+   
+    $trianglesCount = count($triangleRepository->findAll());
+    $trianglesCircumference = $triangleRepository->findAll();
+    $trianglesArea = $triangleRepository->findAll();
+    
 
     return $this->json([
         'number_Of_triangles:' => $trianglesCount ,
-        'total_surface:' => $trianglesCircumference , 
-        'total_circumference:' => $trianglesArea]);
+        'total_surface:' => $trianglesArea , 
+        'total_circumference:' => $trianglesCircumference]);
+   
 }
 
 }

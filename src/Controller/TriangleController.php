@@ -6,7 +6,6 @@ use App\Entity\Triangle;
 use App\Repository\TriangleRepository;
 use App\Form\TriangleType;
 use App\Service\GeometryCalculator;
-use Doctrine\Migrations\Configuration\EntityManager\ManagerRegistryEntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -102,9 +101,10 @@ class TriangleController extends AbstractController
     }
 
     #[Route('/triangles', name: '.GeometryCalculator')]
-    public function triangles(GeometryCalculator $geometryCalculator) :JsonResponse
+    public function triangles(GeometryCalculator $geometryCalculator, TriangleRepository $triangleRepository) :JsonResponse
     {
-            $triangleOutput = $geometryCalculator->getTrianglecalCulation();
+            $triangleOutput = $geometryCalculator->getTriangleCalculation($triangleRepository);
+
 
                return ($triangleOutput);
     
