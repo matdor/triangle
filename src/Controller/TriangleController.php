@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Triangle;
 use App\Repository\TriangleRepository;
 use App\Form\TriangleType;
+use App\Service\GeometryCalculator;
 use Doctrine\Migrations\Configuration\EntityManager\ManagerRegistryEntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -81,10 +82,6 @@ class TriangleController extends AbstractController
                 return $this->redirect($this->generateUrl('triangle.home'));
 
             }
-        //push the created triangle into the db
-       
-
-        
 
         return $this->render('triangle/create.html.twig', [
             'form' => $form ->createView()
@@ -103,4 +100,14 @@ class TriangleController extends AbstractController
                return $this->redirect($this->generateUrl('triangle.home'));
     
     }
+
+    #[Route('/triangles', name: '.GeometryCalculator')]
+    public function triangles(GeometryCalculator $geometryCalculator) :JsonResponse
+    {
+            $triangleOutput = $geometryCalculator->getTrianglecalCulation();
+
+               return ($triangleOutput);
+    
+    }
+
 }
