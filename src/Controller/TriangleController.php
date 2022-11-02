@@ -32,15 +32,13 @@ class TriangleController extends AbstractController
     #[Route('/{a}/{b}/{c}' , name: '.create')]
     public function create(Request $request, $a, $b, $c, ManagerRegistry $doctrine):Response
     {
-        $a = $request->get('a');
-        $b = $request->get('b');
-        $c = $request->get('c');
+
         //create new triangle with sides a b c
 
         $createTriangle = new Triangle();
-        $createTriangle -> setSideA($a);
-        $createTriangle -> setSideB($b);
-        $createTriangle -> setSideC($c);
+        $createTriangle -> setSideA($request->get('a'));
+        $createTriangle -> setSideB($request->get('b'));
+        $createTriangle -> setSideC($request->get('c'));
         
         //push the created triangle into the db
         $em = $doctrine->getManager();

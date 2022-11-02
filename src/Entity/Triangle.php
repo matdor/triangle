@@ -23,11 +23,6 @@ class Triangle
     #[ORM\Column]
     private ?float $sideC = null;
 
-    private ?float $circumferenceT = null;
-
-    private ?float $areaT = null;
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -74,27 +69,11 @@ class Triangle
         return $this->sideA + $this->sideB + $this->sideC;
     }
 
-    public function setCircomferenceT(float $circumferenceT)
-    {
-        $this->circumferenceT = $circumferenceT;
-
-        return $this;
-    }
-
     public function getAreaT(): ?float
     {
         return round(sqrt((($this->sideA+$this->sideB+$this->sideC)/2)*
         ((($this->sideA+$this->sideB+$this->sideC)/2)-$this->sideA)*
         ((($this->sideA+$this->sideB+$this->sideC)/2)-$this->sideB)*
         ((($this->sideA+$this->sideB+$this->sideC)/2)-$this->sideC)), 2);
-    }
-
-    public function setAreaT(float $areaT)
-    {
-        $this->areaT = $areaT;
-
-        return $this;
-    }
-    
-
+    }  
 }

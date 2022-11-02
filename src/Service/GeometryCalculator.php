@@ -11,16 +11,26 @@ class GeometryCalculator extends AbstractController
 public function getTriangleCalculation(TriangleRepository $triangleRepository,): JsonResponse
 {
    
-    $trianglesCount = count($triangleRepository->findAll());
-    $trianglesCircumference = $triangleRepository->findAll();
-    $trianglesArea = $triangleRepository->findAll();
-    
+    $triangles = $triangleRepository->findBy([]);
 
-    return $this->json([
-        'number_Of_triangles:' => $trianglesCount ,
-        'total_surface:' => $trianglesArea , 
-        'total_circumference:' => $trianglesCircumference]);
-   
+    if (count($triangles)< 1){
+        throw $this->createNotFoundException(
+            'No triangles found'
+        );
+    }
+
+        $ret = [
+            'number_of_triangles' => 0,
+            'total_surface' => 0,
+            'total_circumference' =>0
+        ] ;
+        foreach($triangles as $triangle){
+            $ret['number_of_triangles'] ++ ;
+            $ret['total_surface'] += $triangle->getAreaT() ;
+            $ret['total_circumference'] += $triangle->getCircumferenceT() ;
+
+        }
+   return $this->json($ret);
 }
 
 }
